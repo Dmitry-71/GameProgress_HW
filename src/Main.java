@@ -38,15 +38,15 @@ public class Main {
     }
 
     private static void zipFiles(String path, List<String> arrayList) {
-        try (ZipOutputStream zout = new ZipOutputStream(new FileOutputStream(path))) {
+        try (ZipOutputStream zouts = new ZipOutputStream(new FileOutputStream(path))) {
             for (String arr : arrayList) {
                 try (FileInputStream fis = new FileInputStream(arr)) {
                     ZipEntry entry = new ZipEntry(arr);
-                    zout.putNextEntry(entry);
+                    zouts.putNextEntry(entry);
                     while (fis.available() > 0) {
-                        zout.write(fis.read());
+                        zouts.write(fis.read());
                     }
-                    zout.closeEntry();
+                    zouts.closeEntry();
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
                 }
